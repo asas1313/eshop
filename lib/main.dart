@@ -1,5 +1,4 @@
 import 'package:eshop/src/config/routes/app_routes.dart';
-import 'package:eshop/src/config/themes/app_theme.dart';
 import 'package:eshop/src/core/utils/constants.dart';
 import 'package:eshop/src/data/models/pagination.dart';
 import 'package:flutter/material.dart';
@@ -15,11 +14,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: kMaterialAppTitle,
       onGenerateRoute: AppRoutes.generateRoute,
-      theme: AppTheme.light,
     );
   }
 }

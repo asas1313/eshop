@@ -5,8 +5,8 @@ import 'package:eshop/src/domain/entities/product_entity.dart';
 class ProductRepositoryDom {
   final repository = ProductRepository();
 
-  Future<ProductEntity> getProduct() async {
-    Product _product = await repository.getProduct();
+  Future<ProductEntity> getProduct(String productCode) async {
+    Product _product = await repository.getProduct(productCode);
     var _productEntity = ProductEntity(
       code: _product.code,
       name: _product.name,

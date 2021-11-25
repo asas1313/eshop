@@ -1,7 +1,6 @@
 import 'package:eshop/src/data/models/pagination.dart';
 import 'package:eshop/src/domain/entities/product_entity.dart';
-import 'package:eshop/src/domain/repositories/product_repository_dom.dart';
-import 'package:eshop/src/presentation/widgets/product_widget.dart';
+import 'package:eshop/src/presentation/blocs/product_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,7 +14,7 @@ class ProductsListWidget extends StatefulWidget {
 
 class _ProductsWidgetState extends State<ProductsListWidget> {
   List<ProductEntity> allProducts = [];
-  final _repositoryDom = ProductRepositoryDom();
+  var productBloc = ProductBloc();
 
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
@@ -30,7 +29,7 @@ class _ProductsWidgetState extends State<ProductsListWidget> {
       refreshController.loadNoData();
       return false;
     }
-    result = await _repositoryDom.getAllProducts();
+    result = await productBloc.getAllProducts();
 
     if (isRefresh) {
       allProducts = result;
@@ -63,25 +62,7 @@ class _ProductsWidgetState extends State<ProductsListWidget> {
   }
 
   onTap(ProductEntity productEntity) {
-    showDialog(
-      context: context,
-      builder: (BuildContext ctx) {
-        return AlertDialog(
-          title: const Text('Product information'),
-          content: Center(
-            child: ProductWidget(product: productEntity),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text('Ok'),
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+    productBloc.showProduct(context, productEntity.code);
   }
 
   @override

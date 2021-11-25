@@ -1,4 +1,4 @@
-import 'package:eshop/src/presentation/views/products_list_view.dart';
+import 'package:eshop/src/presentation/widgets/product_list_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -8,7 +8,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Product list application')),
-      body: const ProductsListView(),
+      body: const ProductsListWidget(),
     );
   }
 }
